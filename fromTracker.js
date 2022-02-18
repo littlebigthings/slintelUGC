@@ -68,6 +68,7 @@ const objForm = {
  * start functionlity.
  *  */
 /**
+ * schedule a call with saif on monday about hsb logic confirmation.
  * function pick the wrapper clone it add form into to and add an attribute this will be form id so that we can uniquely target them.
  */
 
@@ -76,6 +77,9 @@ class HSBFORMS {
         this.formObj = formObj;
         this.mainWrapper = document.querySelector('.form-component');
         this.formWrapper = this.mainWrapper.querySelector('.embed-form-super-wrapper');
+        // this.errorBlock = 
+        this.nextFormToOpen = null;
+        this.submittedFormId = null;
         this.init();
     }
     init() {
@@ -165,6 +169,7 @@ class HSBFORMS {
         window.addEventListener('message', event => {
             if(event.data.eventName === 'onFormSubmit') {
                 console.log(event.data)
+                this.submittedFormId = event.data.id;
                 let subForm = this.formObj[event.data.id];
                 let filledForm = event.data;
                 if(subForm.checkfield !== undefined){
@@ -172,20 +177,37 @@ class HSBFORMS {
                     filledForm.data.forEach(data => {
                         if(checkfield.includes(data.name)){
                             let selectCheckField = checkfield.find(field => field == data.name)
-                            let nextFormToOpen = subForm.checkfield[selectCheckField][data.value];
+                            this.nextFormToOpen = subForm.checkfield[selectCheckField][data.value];
                             console.log(selectCheckField)
-                            console.log(nextFormToOpen)
-                            // set next form to open
+                            console.log(this.nextFormToOpen)
                         }
                     })
                     // console.log(this.formObj[event.data.id].checkfield[index])
+                }else{
+                    this.nextFormToOpen = null;
                 }
                 // console.log(Object.keys(event.data).length)
             }
             else if(event.data.eventName === 'onFormSubmitted'){
                 //call funciton to open next form.
+                if(this.nextFormToOpen != null){
+                    this.openNextForm();
+                }
             }
          });
+    }
+
+    openNextForm(){
+        console.log(this.submittedFormId)
+        let formToHide = document.querySelector(`[formId='${this.submittedFormId}']`);
+        let formToShow = document.querySelector(`[formId='${this.nextFormToOpen}']`);
+
+        formToHide.style.display = "none";
+        formToShow.style.display = "block";
+    }
+
+    showError(){
+
     }
 }
 // test cases.

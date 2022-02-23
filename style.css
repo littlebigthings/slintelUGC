@@ -1,5 +1,5 @@
 .embed-form-super-wrapper .hs-form fieldset .hs-form-field {
-  padding: 0 10px;
+  padding: 0 0px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -24,7 +24,7 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-  max-width: 47.7em;
+  max-width: 50em;
   background: #fff;
   border-radius: 16px !important;
   -moz-border-radius: 16px !important;
@@ -36,10 +36,10 @@
   margin: 0 auto;
 }
 .embed-form-super-wrapper .hs-form label,
-.embed-form-super-wrapper .hs-form label span {
+.embed-form-super-wrapper .hs-form label span:first-child{
   font-family: "Avenir Next", sans-serif !important;
   color: #340d45 !important;
-  font-size: 0.972em !important;
+  font-size: 1.2em !important;
   line-height: 1.32;
   letter-spacing: 0px !important;
   font-weight: 600 !important;
@@ -47,7 +47,7 @@
 }
 .embed-form-super-wrapper .hs-form label {
   width: 100% !important;
-  float: left !important;
+  /* float: left !important; */
   text-align: left !important;
   padding-left: 0px !important;
   padding-right: 0px !important;
@@ -77,21 +77,21 @@ input[type="number"],
   text-align: left !important;
   font-family: "Avenir Next", sans-serif !important;
   letter-spacing: 0px !important;
-  font-weight: 100 !important;
-  font-size: 0.972em !important;
+  font-weight: 500 !important;
+  font-size: 1.5em !important;
   line-height: 1.36;
   color: #340d45 !important;
   background-color: #f7faff !important;
   padding: 0.658em 1.105em 0.658em 1.471em;
   margin-top: 0.2em;
   margin-bottom: 1em;
-  border-radius: 2.19em !important;
-  -moz-border-radius: 2.19em !important;
-  -webkit-border-radius: 2.19em !important;
+  border-radius: 0.6em !important;
+  -moz-border-radius: 0.6em !important;
+  -webkit-border-radius: 0.6em !important;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border: 0px !important;
+  border: 1px solid #340d4521 !important;
   height: auto !important;
   width: 100% !important;
   -webkit-appearance: none;
@@ -122,11 +122,11 @@ input[type="number"],
   padding-right: 4.392em;
   padding-left: 4.392em;
   margin-top: 2.928em !important;
-  font-size: 1.171em !important;
+  font-size: 1.2em !important;
   line-height: 1;
   font-family: "Avenir Next", sans-serif !important;
-  letter-spacing: 3px !important;
-  font-weight: 500 !important;
+  letter-spacing: 1px !important;
+  font-weight: 600 !important;
   border: 1px solid #f64b53 !important;
   border-radius: 2.307em !important;
   background-color: #f64b53 !important;
@@ -176,9 +176,11 @@ input[type="number"],
 .embed-form-super-wrapper .hs-form .hs-error-msgs label span {
   font-family: "Avenir Next", sans-serif !important;
   letter-spacing: 1px !important;
-  font-weight: 300 !important;
-  font-size: 12px !important;
+  font-weight: 500 !important;
+  font-size: 1.4em !important;
   color: #ff1c1c !important;
+  /* margin-bottom: 0 !important; */
+  line-height: 2;
 }
 .embed-form-super-wrapper .hs-form button:hover,
 .embed-form-super-wrapper .hs-form input[type="button"]:hover,
@@ -193,6 +195,7 @@ input[type="number"],
   height: auto !important;
   box-shadow: none !important;
 }
+/* checkbox styling */
 .embed-form-super-wrapper .hs-form input[type="checkbox"] {
   appearance: none;
   width: 1.162em;
@@ -214,6 +217,10 @@ input[type="number"],
     background-size: contain;
     background-position: center;
     color: #00b97e !important;
+}
+.embed-form-super-wrapper .hs-form .hs-form-checkbox-display{
+    display: flex;
+    align-items: center;
 }
 .center-the-form form,
 .center-the-form form input {
@@ -250,7 +257,9 @@ input[type="number"],
 .embed-form-super-wrapper .hs-form .inputs-list .hs-form-checkbox {
   list-style: none !important;
 }
-
+.embed-form-super-wrapper .hs-form .inputs-list{
+    padding-left: 1.4em !important;
+}
 /* styling for select arrow */
 .embed-form-super-wrapper .hs-form .input select,
 .embed-form-super-wrapper .hs-form .hs-input select,
@@ -259,4 +268,14 @@ input[type="number"],
   background-position: 95% 50%;
   background-size: 0.732em;
   background-repeat: no-repeat;
+}
+/* styling for required field */
+.hs-form-required{
+    color: #ff1c1c !important;
+}
+
+/* styling for error */
+.embed-form-super-wrapper .hs-form .no-list{
+    list-style: none;
+    padding-left: 0 !important;
 }

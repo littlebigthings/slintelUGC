@@ -112,27 +112,32 @@ class HSBFORMS {
     openClosePopup(target) {
 
         if (this.takeSurveyBtn.includes(target)) {
-
             this.popupWrapper.classList.remove("hide-popup");
             if (target.getAttribute("takesurvey") == "firsttime" || target.getAttribute("takesurvey") == "notClicked") {
                 this.takeSurveyBtnStatus = "clicked";
+                document.body.classList.add("stop-scroll");
                 this.termsWrapper.classList.remove("hide");
             }
             else if (target.getAttribute("takesurvey") == "started") {
+                document.body.classList.add("stop-scroll");
                 this.takeSurveyBtnStatus = "started";
                 this.mainWrapper.classList.remove("hide");
             }
             else if (target.getAttribute("takesurvey") == "failed") {
+                document.body.classList.add("stop-scroll");
                 this.showError();
             }
         }
 
         else if (target == this.startSurveyBtn) {
+            document.body.classList.add("stop-scroll");
+            this.takeSurveyBtnStatus = "started";
             this.termsWrapper.classList.add("hide");
             this.mainWrapper.classList.remove("hide");
         }
 
         else {
+            document.body.classList.remove("stop-scroll");
             this.popupWrapper.classList.add("hide-popup");
         }
     }
@@ -163,7 +168,6 @@ class HSBFORMS {
         catch (error) {
             // call show error function here.
             this.showError()
-            console.log(error);
         }
     }
 
@@ -202,8 +206,6 @@ class HSBFORMS {
                         if (checkfield.includes(data.name)) {
                             let selectCheckField = checkfield.find(field => field == data.name)
                             this.nextFormToOpen = subForm.checkfield[selectCheckField][data.value];
-                            console.log(selectCheckField)
-                            console.log(this.nextFormToOpen)
                         }
                     })
                 } else {
@@ -224,8 +226,6 @@ class HSBFORMS {
                 // call show error function here.
                 // add custom error message if config went wrong.
                 this.showError();
-                console.log("not Ready");
-
             }
         });
     }
@@ -251,6 +251,7 @@ class HSBFORMS {
 
     showError() {
         this.popupWrapper.classList.remove("hide-popup");
+        document.body.classList.add("stop-scroll");
         this.popupWrapper.childNodes.forEach(child => {
             if(child.style.display != "none"){
                 child.classList.add("hide");
@@ -272,11 +273,14 @@ class HSBFORMS {
                 this.errorBlock.classList.add("hide");
                 if(this.takeSurveyBtnStatus == "clicked"){
                     this.termsWrapper.classList.remove("hide");
+                    document.body.classList.add("stop-scroll");
                 }
                 else if(this.takeSurveyBtnStatus == "started"){
+                    document.body.classList.add("stop-scroll");
                     this.mainWrapper.classList.remove("hide");
                 }
                 else{
+                    document.body.classList.remove("stop-scroll");
                     this.popupWrapper.classList.add("hide-popup")
                 }
             }

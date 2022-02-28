@@ -1,31 +1,16 @@
 const objForm = {
-    "f77120a7-8435-4aa2-8ee1-7c4c9e273f76": {
+    "89c0b68e-6c86-45c9-9c1a-b66537cf8f94": {
         startForm: true,
         isFormReady: false,
-        checkfield: {
-            department: {
-                "Sales": "30fa9a91-ea3d-47a0-b96a-784c9b4c7e24",
-                "Business Development": "30fa9a91-ea3d-47a0-b96a-784c9b4c7e24",
-                "Marketing": "42f54135-7546-4b34-9c5a-750d18296001",
-                "Human Resources": "5349bbf8-afb0-4ec6-a18a-f7b6f4aabaf4",
-            },
-        },
+        nextForm:"30fa9a91-ea3d-47a0-b96a-784c9b4c7e24",
     },
     "30fa9a91-ea3d-47a0-b96a-784c9b4c7e24": {
         startForm: false,
         isFormReady: false,
     },
-    "42f54135-7546-4b34-9c5a-750d18296001": {
-        startForm: false,
-        isFormReady: false,
-    },
-    "5349bbf8-afb0-4ec6-a18a-f7b6f4aabaf4": {
-        startForm: false,
-        isFormReady: false,
-    },
 }
 
-const redirectLink = "/thank-you";
+const redirectLink = "/thank-you-two";
 
 class HSBFORMS {
     constructor(formObj, redirectLink) {
@@ -177,16 +162,10 @@ class HSBFORMS {
             else if (event.data.eventName === 'onFormSubmit') {
                 this.submittedFormId = event.data.id;
                 let subForm = this.formObj[event.data.id];
-                let filledForm = event.data;
-                if (subForm.checkfield !== undefined) {
-                    let checkfield = Object.getOwnPropertyNames(subForm.checkfield);
-                    filledForm.data.forEach(data => {
-                        if (checkfield.includes(data.name)) {
-                            let selectCheckField = checkfield.find(field => field == data.name)
-                            this.nextFormToOpen = subForm.checkfield[selectCheckField][data.value];
-                        }
-                    })
-                } else {
+                if (subForm.nextForm != undefined && subForm.nextForm.length != 0) {
+                    this.nextFormToOpen = subForm.nextForm;
+                }
+                else{
                     this.nextFormToOpen = null;
                 }
             }

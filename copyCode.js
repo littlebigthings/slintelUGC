@@ -5,7 +5,7 @@ if(clipboard){
         setTimeout(() => {
             e.trigger.innerHTML = "copy"
             e.clearSelection();
-        }, 5000);
+        }, 3000);
     });
     
     clipboard.on('error', (e) => {

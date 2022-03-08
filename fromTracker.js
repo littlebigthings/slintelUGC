@@ -60,13 +60,15 @@ class HSBFORMS {
             })
         })
 
-        if (this.startSurveyBtn !== undefined && this.startSurveyBtn !== null)this.startSurveyBtn.addEventListener("click", (e) => {
+        if (this.startSurveyBtn !== undefined && this.startSurveyBtn !== null) this.startSurveyBtn.addEventListener("click", (e) => {
 
             // this.takeSurveyBtnStatus = "started";
             if (this.takeSurveyBtn.length != 0) {
                 this.takeSurveyBtn.forEach(btn => {
                     btn.setAttribute("takesurvey", "started")
-                    btn.innerHTML = "Continue Survey";
+                    if (!btn.hasAttribute("data-btn")) {
+                        btn.innerHTML = "Continue Survey";
+                    }
                 });
             }
             this.openClosePopup(e.target);
@@ -210,7 +212,7 @@ class HSBFORMS {
     openForm(formId, showFirst) {
         let formToView = document.querySelector(`[formId='${formId}']`);
         // adding close btn here into the form
-        if(formToView != undefined || formToView != null){
+        if (formToView != undefined || formToView != null) {
             formToView.appendChild(this.closeBtnToClone.cloneNode(true));
             if (!showFirst) {
                 formToView.style.display = "none";
@@ -231,7 +233,7 @@ class HSBFORMS {
         this.popupWrapper.classList.remove("hide-popup");
         document.body.classList.add("stop-scroll");
         this.popupWrapper.childNodes.forEach(child => {
-            if(child.style.display != "none"){
+            if (child.style.display != "none") {
                 child.classList.add("hide");
             }
         })
@@ -244,20 +246,20 @@ class HSBFORMS {
     checkConnection() {
         window.addEventListener('online', () => {
             if (!this.isConnected) {
-                if(this.takeSurveyBtn.length != 0)this.takeSurveyBtn.forEach(btn => {
+                if (this.takeSurveyBtn.length != 0) this.takeSurveyBtn.forEach(btn => {
                     btn.setAttribute("takesurvey", this.takeSurveyBtnStatus);
                 })
                 this.isConnected = true;
                 this.errorBlock.classList.add("hide");
-                if(this.takeSurveyBtnStatus == "clicked"){
+                if (this.takeSurveyBtnStatus == "clicked") {
                     this.termsWrapper.classList.remove("hide");
                     document.body.classList.add("stop-scroll");
                 }
-                else if(this.takeSurveyBtnStatus == "started"){
+                else if (this.takeSurveyBtnStatus == "started") {
                     document.body.classList.add("stop-scroll");
                     this.mainWrapper.classList.remove("hide");
                 }
-                else{
+                else {
                     document.body.classList.remove("stop-scroll");
                     this.popupWrapper.classList.add("hide-popup")
                 }

@@ -51,7 +51,9 @@ class HSBFORMS {
             if (this.takeSurveyBtn.length != 0) {
                 this.takeSurveyBtn.forEach(btn => {
                     btn.setAttribute("takesurvey", "started")
-                    btn.innerHTML = "Continue Survey";
+                    if (!btn.hasAttribute("data-btn")) {
+                        btn.innerHTML = "Continue Survey";
+                    }
                 });
             }
             this.openClosePopup(e.target);

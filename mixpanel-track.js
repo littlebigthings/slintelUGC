@@ -1,6 +1,7 @@
 class SETUPMIXPANEL {
     constructor() {
         this.links = document.querySelectorAll("[data-track='mxpdata']");
+        this.startSurvey = document.querySelector("[startsurvey]");
         this.sections = document.querySelectorAll("[section]");
         this.currUrl = document.location.href;
         this.init();
@@ -16,6 +17,9 @@ class SETUPMIXPANEL {
     trackClicksOnLink() {
         if (this.links.length > 0) {
             mixpanel.track_links(this.links, "click_landing_page", this.sendClickedData);
+        }
+        if(this.startSurvey != undefined || this.startSurvey != null){
+            mixpanel.track_links(this.startSurvey, "click_survey_start_CTA");
         }
     }
 

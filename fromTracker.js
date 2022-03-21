@@ -50,7 +50,6 @@ class HSBFORMS {
         this.checkConnection();
         this.sendFormToInject();
         this.listenReadyForms();
-        this.getParams();
     }
 
     btnListener() {
@@ -209,6 +208,7 @@ class HSBFORMS {
                 this.showError();
             }
         });
+        this.getParams();
     }
     openForm(formId, showFirst) {
         let formToView = document.querySelector(`[formId='${formId}']`);
@@ -277,8 +277,10 @@ class HSBFORMS {
         this.$utm_source = document.querySelectorAll("input[name='visit_source']");
         this.$utm_medium = document.querySelectorAll("input[name='visit_medium']");
         this.$utm_campaign = document.querySelectorAll("input[name='campaign']");
+        this.$last_conversion = document.querySelectorAll("input[name='last_conversion_lp_url']");
         if (this.checkSearch.length > 0) {
             let paramsFromUrl = (new URL(document.location)).searchParams;
+            this.pageUrl = document.location.href.split("?")[0];
             paramsFromUrl.forEach((key, value) => {
                 this.sendParams[`${value}`] = key;
             });
@@ -305,6 +307,13 @@ class HSBFORMS {
             this.$utm_campaign.forEach(item => {
                 if (this.sendParams['utm_campaign'] != undefined) {
                     item.value = this.sendParams['utm_campaign'];
+                }
+            })
+        }
+        if (this.$last_conversion.length > 0) {
+            this.$last_conversion.forEach(item => {
+                if (this.pageUrl.length > 0) {
+                    item.value = this.pageUrl;
                 }
             })
         }

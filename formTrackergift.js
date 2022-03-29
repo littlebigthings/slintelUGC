@@ -257,6 +257,7 @@ class HSBFORMS {
         this.$utm_medium = document.querySelectorAll("input[name='visit_medium']");
         this.$utm_campaign = document.querySelectorAll("input[name='campaign']");
         this.$last_conversion = document.querySelectorAll("input[name='last_conversion_lp_url']");
+        this.$mixpanel_customId_elm = document.querySelectorAll("input[name='mixpanel_custom_id']");
         if (this.checkSearch.length > 0) {
             let paramsFromUrl = (new URL(document.location)).searchParams;
             this.pageUrl = document.location.href.split("?")[0];
@@ -268,33 +269,43 @@ class HSBFORMS {
     }
     
     setParams() {
+        // set Session id.
+        if(this.$mixpanel_customId_elm.length > 0){
+            // console.log(this.$mixpanel_customId_elm);
+            let SESSION_ID = mixpanel.get_property("session ID")
+            if(SESSION_ID != null){
+            this.$mixpanel_customId_elm.forEach(item => {
+                    item.value = SESSION_ID
+                })
+            }
+        }
         if (this.$utm_source.length > 0) {
+            if (this.sendParams['utm_source'] != undefined) {
             this.$utm_source.forEach(item => {
-                if (this.sendParams['utm_source'] != undefined) {
                     item.value = this.sendParams['utm_source'];
-                }
-            })
+                })
+            }
         }
         if (this.$utm_medium.length > 0) {
+            if (this.sendParams['utm_medium'] != undefined) {
             this.$utm_medium.forEach(item => {
-                if (this.sendParams['utm_medium'] != undefined) {
                     item.value = this.sendParams['utm_medium'];
-                }
-            })
+                })
+            }
         }
         if (this.$utm_campaign.length > 0) {
+            if (this.sendParams['utm_campaign'] != undefined) {
             this.$utm_campaign.forEach(item => {
-                if (this.sendParams['utm_campaign'] != undefined) {
                     item.value = this.sendParams['utm_campaign'];
-                }
-            })
+                })
+            }
         }
         if (this.$last_conversion.length > 0) {
+            if (this.pageUrl.length > 0) {
             this.$last_conversion.forEach(item => {
-                if (this.pageUrl.length > 0) {
                     item.value = this.pageUrl;
-                }
-            })
+                })
+            }
         }
     }
 }
